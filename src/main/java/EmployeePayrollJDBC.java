@@ -4,11 +4,10 @@ public class EmployeePayrollJDBC {
     static Connection connection;
     static Statement statement;
 
-
     public void executeGivenQuery(String query) throws SQLException {
         ResultSet resultSet = statement.executeQuery(query);
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-        for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
+        for(int i=1;i<=resultSetMetaData.getColumnCount();i++){
             System.out.println(resultSetMetaData.getColumnLabel(i));
         }
     }
