@@ -4,11 +4,18 @@ public class EmployeePayrollJDBC {
     static Connection connection;
     static Statement statement;
 
-    public void executeGivenQuery(String query) throws SQLException {
+    public void executeQueryToDisplayTable(String query) throws SQLException {
         ResultSet resultSet = statement.executeQuery(query);
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-        for(int i=1;i<=resultSetMetaData.getColumnCount();i++){
-            System.out.println(resultSetMetaData.getColumnLabel(i));
+        while (resultSet.next()) {
+            for (int i = 0; i <= resultSetMetaData.getColumnCount(); i++) {
+                if (i == 0) {
+                    System.out.print(resultSetMetaData.getColumnLabel(i + 1) + "\t");
+                } else {
+                    System.out.print(resultSet.getString(i) + "\t");
+                }
+            }
+            System.out.println();
         }
     }
 
@@ -18,6 +25,21 @@ public class EmployeePayrollJDBC {
             statement = connection.createStatement();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        }
+    }
+
+    public void executeGivenQuery(String query) throws SQLException {
+        ResultSet resultSet = statement.executeQuery(query);
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        while (resultSet.next()) {
+            for (int i = 0; i <= resultSetMetaData.getColumnCount(); i++) {
+                if (i == 0) {
+                    System.out.print(resultSetMetaData.getColumnLabel(i + 1) + "\t");
+                } else {
+                    System.out.print(resultSet.getString(i) + "\t");
+                }
+            }
+            System.out.println();
         }
     }
 }
